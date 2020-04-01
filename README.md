@@ -28,7 +28,7 @@ Create the `anymal_locomotion_ws` workspace and clone the cerberus_anymal_locomo
 ```
 mkdir -p ~/anymal_locomotion_ws/src && cd ~/anymal_locomotion_ws/src
 
-git clone git@github.com:leggedrobotics/cerberus_anymal_locomotion.git # or https git clone https://github.com/leggedrobotics/cerberus_anymal_locomotion.git
+git clone git@github.com:leggedrobotics/cerberus_anymal_locomotion.git # or over https: git clone https://github.com/leggedrobotics/cerberus_anymal_locomotion.git
 
 git submodule update --init --recursive
 ```
