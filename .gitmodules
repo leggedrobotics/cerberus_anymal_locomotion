@@ -1,0 +1,9 @@
+[submodule "catkin_simple"]
+	path = catkin_simple
+	url = https://github.com/catkin/catkin_simple
+[submodule "glog_catkin"]
+	path = glog_catkin
+	url = https://github.com/ethz-asl/glog_catkin
+[submodule "tensorflow-cpp"]
+	path = tensorflow-cpp
+	url = https://github.com/leggedrobotics/tensorflow-cpp
