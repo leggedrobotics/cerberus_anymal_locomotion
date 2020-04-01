@@ -30,6 +30,8 @@ mkdir -p ~/anymal_locomotion_ws/src && cd ~/anymal_locomotion_ws/src
 
 git clone git@github.com:leggedrobotics/cerberus_anymal_locomotion.git # or over https: git clone https://github.com/leggedrobotics/cerberus_anymal_locomotion.git
 
+cd cerberus_anymal_locomotion/
+
 git submodule update --init --recursive
 ```
 
