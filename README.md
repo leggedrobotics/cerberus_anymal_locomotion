@@ -1,7 +1,12 @@
 # CERBERUS ANYmal Control
 This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://bitbucket.org/osrf/subt/wiki/Home).
 
-**Authors & Maintainers: Marco Tranzatto, Samuel Zimmermann, Timon Homberger [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)**
+**Authors & Maintainers**: 
+  * Marco Tranzatto
+  * Samuel Zimmermann
+  * Timon Homberger
+  
+**Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)**
 
 [![CERBERUS ANYmal](doc/cerberus_anymal.gif)](doc/cerberus_anymal.gif)
 
