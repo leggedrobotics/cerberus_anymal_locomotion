@@ -6,7 +6,7 @@ This repository contains the software that can be used to control the ANYmal mod
   * Samuel Zimmermann
   * Timon Homberger
   
-**Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)**
+**Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
 
 [![CERBERUS ANYmal](doc/cerberus_anymal.gif)](doc/cerberus_anymal.gif)
 
@@ -16,7 +16,7 @@ This software is released under a [BSD 3-Clause license](LICENSE).
 ## Publications
 If you use this work in an academic context, please cite the following publications:
 
-`To be come soon ...`
+`Coming soon ...`
 
 ## Dependencies
 The following dependencies are needed to run the ANYmal locomotion controller.
