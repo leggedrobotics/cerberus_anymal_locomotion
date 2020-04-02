@@ -1,4 +1,4 @@
-// Deep learning controller simulation for Darpa SubT virtual competition
+// Ros controller for Darpa SubT virtual competition
 
 #include <ros/ros.h>
 #include <ros/package.h>
@@ -7,8 +7,6 @@
 
 CerberusAnymalControl::CerberusAnymalControl()
 {
-
-  ROS_INFO("Starting deep learning control sim\n");
 
   nh_.getParam("CerberusAnymalControl/robot_name", robot_name_);
 
@@ -82,15 +80,11 @@ void CerberusAnymalControl::LoadParams()
 
   std::string package_path = ros::package::getPath("cerberus_anymal_control");
 
-  ROS_INFO_STREAM("[DeepLearningController::loadNNparams] loading params...");
-
   graph_.initialize(package_path + "/config/200205/graph.pb");
   graph_.loadLP(package_path + "/config/200205/distill_params_1000.txt");
 
   // Initialize controller parameters
   quadrupedController_->reset(&graph_);
-
-  ROS_INFO_STREAM("[DeepLearningController::initialize] Done!");
 }
 
 void CerberusAnymalControl::CommandVelCallback(const geometry_msgs::Twist& twistMsg)
