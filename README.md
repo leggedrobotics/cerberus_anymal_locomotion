@@ -52,3 +52,6 @@ source ~/anymal_locomotion_ws/devel/setup.bash
 
 roslaunch cerberus_anymal_control cerberus_anymal_controller.launch
 ```
+
+## Bugs & Issues
+Please report bugs or issues using the [Issue Tracker](https://github.com/leggedrobotics/cerberus_anymal_locomotion/issues).
