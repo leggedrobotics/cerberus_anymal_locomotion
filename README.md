@@ -1,4 +1,4 @@
-# CERBERUS ANYmal Control
+# CERBERUS ANYmal Locomotion
 This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://bitbucket.org/osrf/subt/wiki/Home).
 
 **Authors & Maintainers**: 
