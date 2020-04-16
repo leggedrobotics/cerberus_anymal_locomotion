@@ -1,5 +1,5 @@
 # CERBERUS ANYmal Locomotion
-This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://bitbucket.org/osrf/subt/wiki/Home).
+This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://github.com/osrf/subt/wiki).
 
 **Authors & Maintainers**: 
   * Marco Tranzatto
@@ -20,7 +20,7 @@ If you use this work in an academic context, please cite the following publicati
 
 ## Dependencies
 The following dependencies are needed to run the ANYmal locomotion controller.
-* catkin workspace setup for the SubT (Ignition) Simulation. See [SubT (Ignition) Simulation](https://bitbucket.org/osrf/subt/wiki/tutorials/SystemSetupInstall).
+* catkin workspace setup for the SubT (Ignition) Simulation. See [SubT (Ignition) Simulation](https://github.com/osrf/subt/wiki/Catkin%20System%20Setup).
 * catkin_tools package. See [catkin_tools](https://catkin-tools.readthedocs.io/en/latest/installing.html).
 
 ## Instructions
