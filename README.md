@@ -43,14 +43,14 @@ cd ~/anymal_locomotion_ws/
 
 catkin config --extend ~/subt_ws/install/
 
-catkin build cerberus_anymal_control
+catkin build cerberus_anymal_control_1
 ```
 
 Launch the ANYmal locomotion controller:
 ```
 source ~/anymal_locomotion_ws/devel/setup.bash
 
-roslaunch cerberus_anymal_control cerberus_anymal_controller.launch
+roslaunch cerberus_anymal_control_1 cerberus_anymal_controller.launch
 ```
 
 ## Bugs & Issues
