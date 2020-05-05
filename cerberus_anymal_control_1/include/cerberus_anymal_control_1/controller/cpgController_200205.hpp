@@ -3,9 +3,9 @@
 
 #include <Eigen/Core>
 #include "string"
-#include "SimpleMLPLayer.hpp"
-#include <cerberus_anymal_control/utils/IK.hpp>
-#include <cerberus_anymal_control/utils/GraphLoader.hpp>
+#include "cerberus_anymal_utils/SimpleMLPLayer.hpp"
+#include "cerberus_anymal_utils/IK.hpp"
+#include "cerberus_anymal_utils/GraphLoader.hpp"
 # define M_PI       3.14159265358979323846    /* pi */
 # define M_PI_2        1.57079632679489661923    /* pi/2 */
 

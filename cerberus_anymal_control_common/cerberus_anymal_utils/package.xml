@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>cerberus_anymal_utils</name>
+  <version>1.0.0</version>
+  <description>Utils for DARPA SubT virtual challenge</description>
+  <maintainer email="zsamuel@ethz.ch">Samuel Zimmermann</maintainer>
+  <license>Proprietary</license>
+  <author email="zsamuel@ethz.ch">Samuel Zimmermann</author>
+
+  <!-- buildtool_depend: dependencies of the build process -->
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

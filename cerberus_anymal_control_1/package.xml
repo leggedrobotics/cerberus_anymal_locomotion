@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>cerberus_anymal_control_1</name>
+  <version>1.0.0</version>
+  <description>ANYmal B controller for DARPA SubT virtual challenge.</description>
+  <license>Proprietary</license>
+  <author email="zsamuel@ethz.ch">Samuel Zimmermann</author>
+  <maintainer email="zsamuel@ethz.ch">Samuel Zimmermann</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <!-- build dependencies -->
+  <depend>catkin_simple</depend>
+  <depend>cerberus_anymal_control_base</depend>
+  <depend>cerberus_anymal_control_ros</depend>
+  <depend>cerberus_anymal_utils</depend>
+  <depend>geometry_msgs</depend>
+  <depend>glog_catkin</depend>
+  <depend>tensorflow</depend>
+  <depend>roscpp</depend>
+  <depend>roslib</depend>
+  <!-- execution dependencies -->
+  <exec_depend>cerberus_anymal_sensor_config_1</exec_depend>
+</package>
