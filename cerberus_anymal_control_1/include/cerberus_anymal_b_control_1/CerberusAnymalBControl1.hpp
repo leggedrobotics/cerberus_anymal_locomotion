@@ -1,5 +1,5 @@
 /*!
- * @name      CerberusAnymalControl1.hpp
+ * @name      CerberusAnymalBControl1.hpp
  * @author    Samuel Zimmermann
  * @email     zsamuel@ethz.ch
  * @date      May 1, 2020
@@ -12,19 +12,20 @@
 #pragma once
 
 // controller
-#include "cerberus_anymal_control_1/controller/cpgController_200205.hpp"
+#include "cerberus_anymal_b_control_1/controller/cpgController_200205.hpp"
 
 // ros controller base class
 #include "cerberus_anymal_control_base/CerberusAnymalControlBaseRos.hpp"
 
-namespace cerberus_anymal_control_1 {
+namespace cerberus_anymal_b_control_1 {
 
-class CerberusAnymalControl1 : public cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController> {
+class CerberusAnymalBControl1
+    : public cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController> {
  public:
   using RosController = cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController>;
 
-  explicit CerberusAnymalControl1(ros::NodeHandle &nodeHandle);
-  ~CerberusAnymalControl1() = default;
+  explicit CerberusAnymalBControl1(ros::NodeHandle &nodeHandle);
+  ~CerberusAnymalBControl1() = default;
 
   void advanceRos() override;
 

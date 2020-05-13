@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(cerberus_anymal_control_1)
+project(cerberus_anymal_b_control_1)
 
 ## Use C++14
 set(CMAKE_CXX_STANDARD 14)
@@ -56,7 +56,7 @@ include_directories(
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}
-  src/${PROJECT_NAME}/CerberusAnymalControl1.cpp
+  src/${PROJECT_NAME}/CerberusAnymalBControl1.cpp
 )
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_11)
 

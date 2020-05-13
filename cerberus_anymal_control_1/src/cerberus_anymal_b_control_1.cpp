@@ -1,5 +1,5 @@
 /*!
- * @name      cerberus_anymal_control_1.cpp
+ * @name      cerberus_anymal_b_control_1.cpp
  * @author    Samuel Zimmermann
  * @email     zsamuel@ethz.ch
  * @date      May 1, 2020
@@ -10,15 +10,15 @@
  */
 
 // cerberus_anymal_control_1
-#include "cerberus_anymal_control_1/CerberusAnymalControl1.hpp"
+#include "cerberus_anymal_b_control_1/CerberusAnymalBControl1.hpp"
 
 int main(int argc, char** argv) {
   // Initialize ROS.
-  ros::init(argc, argv, "cerberus_anymal_control_ros");
+  ros::init(argc, argv, "cerberus_anymal_b_control_ros");
   ros::NodeHandle nodeHandle;
 
   // Create the controller
-  cerberus_anymal_control_1::CerberusAnymalControl1 controller(nodeHandle);
+  cerberus_anymal_b_control_1::CerberusAnymalBControl1 controller(nodeHandle);
 
   // Set the controller frequency
   ros::Rate loop_rate(400);

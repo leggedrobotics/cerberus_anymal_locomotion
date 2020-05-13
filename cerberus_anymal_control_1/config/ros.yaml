@@ -5,8 +5,6 @@ subscriber:
     topic: "joint_state"
   body_twist:
     topic: "robot_base_twist"
-  body_pose:
-    topic: "robot_base_pose"
 
 publisher:
   des_joint_position:
