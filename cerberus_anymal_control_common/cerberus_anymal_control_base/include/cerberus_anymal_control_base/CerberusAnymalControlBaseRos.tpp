@@ -115,22 +115,4 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::bodyTwistCallbac
   }
 }
 
-template<typename ConcreteQuadrupedController>
-void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::bodyPoseCallback(const geometry_msgs::TransformStamped &bodyPose) {
-  using namespace cerberus_anymal_control;
-  boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-  // Set the body pose
-  Controller::genCoordinates_(0) = bodyPose.transform.translation.x;
-  Controller::genCoordinates_(1) = bodyPose.transform.translation.y;
-  Controller::genCoordinates_(2) = bodyPose.transform.translation.z;
-  Controller::genCoordinates_(3) = bodyPose.transform.rotation.w;
-  Controller::genCoordinates_(4) = bodyPose.transform.rotation.x;
-  Controller::genCoordinates_(5) = bodyPose.transform.rotation.y;
-  Controller::genCoordinates_(6) = bodyPose.transform.rotation.z;
-  // Set the flag
-  if(!Controller::hasBodyPoseData_) {
-    Controller::hasBodyPoseData_ = true;
-  }
-}
-
 } // namespace cerberus_anymal_control_ros

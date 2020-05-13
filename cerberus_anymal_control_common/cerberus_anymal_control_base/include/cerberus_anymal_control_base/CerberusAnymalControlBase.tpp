@@ -23,7 +23,6 @@ CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBas
     desLinearVelocity_(Eigen::Vector3d::Zero()),
     desAngularVelocity_(Eigen::Vector3d::Zero()),
     desJointPositions_(Eigen::VectorXd::Zero(numberOfJoints)),
-    hasBodyPoseData_(false),
     hasBodyVelocityData_(false),
     hasJointPositionData_(false),
     initializedGraph_(false)
@@ -32,6 +31,14 @@ CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBas
   if (numberOfJoints_ != 12) {
     std::cout << "[CerberusAnymalControlBase::CerberusAnymalControlBase] Joint Number is not equal to 12! Controller might not be working properly." << std::endl;
   }
+  // Fix the pose since we already subscribe in base frame
+  genCoordinates_(0) = 0.0;
+  genCoordinates_(1) = 0.0;
+  genCoordinates_(2) = 0.0;
+  genCoordinates_(3) = 1.0;
+  genCoordinates_(4) = 0.0;
+  genCoordinates_(5) = 0.0;
+  genCoordinates_(6) = 0.0;
 }
 
 template <typename ConcreteQuadrupedController>
@@ -43,7 +50,7 @@ void CerberusAnymalControlBase<ConcreteQuadrupedController>::loadParameters(cons
 
 template <typename ConcreteQuadrupedController>
 void CerberusAnymalControlBase<ConcreteQuadrupedController>::advance() {
-  if (hasBodyPoseData_ && hasBodyVelocityData_ && hasJointPositionData_) {
+  if (hasBodyVelocityData_ && hasJointPositionData_) {
     if (!initializedGraph_) {
       initialize();
       initializedGraph_ = true;

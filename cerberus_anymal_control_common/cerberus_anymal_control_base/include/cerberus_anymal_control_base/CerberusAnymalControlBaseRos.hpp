@@ -36,7 +36,6 @@ class CerberusAnymalControlBaseRos : public cerberus_anymal_control::CerberusAny
   void commandVelCallback(const geometry_msgs::Twist &twistMsg) override;
   void jointStateCallback(const sensor_msgs::JointState &jointStateMsg) override;
   void bodyTwistCallback(const geometry_msgs::Twist &bodyTwistMsg) override;
-  void bodyPoseCallback(const geometry_msgs::TransformStamped &bodyPose) override;
 };
 
 } // namespace cerberus_anymal_control_ros

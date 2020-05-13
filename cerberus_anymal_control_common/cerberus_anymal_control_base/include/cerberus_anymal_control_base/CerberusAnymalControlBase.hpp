@@ -58,7 +58,6 @@ class CerberusAnymalControlBase {
   mutable boost::shared_mutex data_mutex_;
 
   //! @brief Checks that data has arrived
-  bool hasBodyPoseData_;
   bool hasBodyVelocityData_;
   bool hasJointPositionData_;
   bool initializedGraph_;

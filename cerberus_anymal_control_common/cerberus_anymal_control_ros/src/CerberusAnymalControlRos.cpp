@@ -34,7 +34,6 @@ void CerberusAnymalControlRos::initializeRos() {
   commandVelSubscriber_ = nodeHandle_.subscribe(commandVelSubscriberTopic_, 10, &CerberusAnymalControlRos::commandVelCallback,this);
   jointStateSubscriber_ = nodeHandle_.subscribe(jointStateSubscriberTopic_, 10, &CerberusAnymalControlRos::jointStateCallback, this);
   bodyTwistSubscriber_ = nodeHandle_.subscribe(bodyTwistSubscriberTopic_, 10, &CerberusAnymalControlRos::bodyTwistCallback, this);
-  bodyPoseSubscriber_ = nodeHandle_.subscribe(bodyPoseSubscriberTopic_, 10, &CerberusAnymalControlRos::bodyPoseCallback, this);
   // Publisher
   desJointPositionPublisher_ = nodeHandle_.advertise<mav_msgs::Actuators>(desJointPositionPublisherTopic_, 10);
 }
@@ -60,12 +59,6 @@ void CerberusAnymalControlRos::loadParametersRos() {
   } else {
     success = false;
     ROS_ERROR("[CerberusAnymalControlRos::loadParametersRos] Could not load body_twist subscriber topic");
-  }
-  if(nodeHandle_.hasParam("subscriber/body_pose/topic")) {
-    nodeHandle_.getParam("subscriber/body_pose/topic",bodyPoseSubscriberTopic_);
-  } else {
-    success = false;
-    ROS_ERROR("[CerberusAnymalControlRos::loadParametersRos] Could not load body_pose subscriber topic");
   }
   if(nodeHandle_.hasParam("publisher/des_joint_position/topic")) {
     nodeHandle_.getParam("publisher/des_joint_position/topic",desJointPositionPublisherTopic_);

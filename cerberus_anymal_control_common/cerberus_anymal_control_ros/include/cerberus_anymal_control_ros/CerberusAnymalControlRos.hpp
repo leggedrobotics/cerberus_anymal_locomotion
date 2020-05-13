@@ -14,7 +14,6 @@
 // ROS
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-#include <geometry_msgs/TransformStamped.h>
 #include <mav_msgs/Actuators.h>
 #include <sensor_msgs/JointState.h>
 
@@ -37,7 +36,6 @@ class CerberusAnymalControlRos {
   virtual void commandVelCallback(const geometry_msgs::Twist &twistMsg) = 0;
   virtual void jointStateCallback(const sensor_msgs::JointState &jointStateMsg) = 0;
   virtual void bodyTwistCallback(const geometry_msgs::Twist &bodyTwistMsg) = 0;
-  virtual void bodyPoseCallback(const geometry_msgs::TransformStamped &bodyPose) = 0;
 
   // Node handle
   ros::NodeHandle& nodeHandle_;
@@ -52,9 +50,6 @@ class CerberusAnymalControlRos {
   ros::Subscriber bodyTwistSubscriber_;
   std::string bodyTwistSubscriberTopic_;
 
-  ros::Subscriber bodyPoseSubscriber_;
-  std::string bodyPoseSubscriberTopic_;
-
   // Publisher
   ros::Publisher desJointPositionPublisher_;
   std::string desJointPositionPublisherTopic_;
@@ -62,6 +57,3 @@ class CerberusAnymalControlRos {
 };
 
 } // namespace cerberus_anymal_control_ros
-
-
-
