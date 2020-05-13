@@ -35,13 +35,14 @@ cd cerberus_anymal_locomotion/
 git submodule update --init --recursive
 ```
 
-Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependency (tensorflow-cpp) and the version used by Ignition Gazebo.
+Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependency (tensorflow-cpp) and the version used by Ignition Gazebo. Furthermore we build in `release` mode.
 ```
 source /opt/ros/melodic/setup.bash
 
 cd ~/anymal_locomotion_ws/
 
 catkin config --extend ~/subt_ws/install/
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=release
 
 catkin build cerberus_anymal_b_control_1
 ```
