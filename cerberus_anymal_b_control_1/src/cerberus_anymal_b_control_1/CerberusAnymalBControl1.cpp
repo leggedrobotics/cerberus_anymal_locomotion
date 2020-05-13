@@ -41,4 +41,4 @@ void CerberusAnymalBControl1::loadParameters() {
   ROS_INFO_STREAM("[CerberusAnymalBControl1::loadParameters] Done!");
 }
 
-} // namespace cerberus_anymal_control_1
+} // namespace cerberus_anymal_b_control_1

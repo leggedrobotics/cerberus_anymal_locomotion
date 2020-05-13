@@ -19,8 +19,7 @@
 
 namespace cerberus_anymal_b_control_1 {
 
-class CerberusAnymalBControl1
-    : public cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController> {
+class CerberusAnymalBControl1 : public cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController> {
  public:
   using RosController = cerberus_anymal_control_ros::CerberusAnymalControlBaseRos<RAI::QuadrupedController>;
 
@@ -34,4 +33,4 @@ class CerberusAnymalBControl1
   void initialize() override;
 };
 
-} // namespace cerberus_anymal_control_1
+} // namespace cerberus_anymal_b_control_1
