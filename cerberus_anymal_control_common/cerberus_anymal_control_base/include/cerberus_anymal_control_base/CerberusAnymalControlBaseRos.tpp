@@ -8,15 +8,21 @@
  * All rights reserved.
  * http://www.rsl.ethz.ch/
  */
+// Testing
+#include <chrono>
+
+// Eigen
+#include <eigen_conversions/eigen_msg.h>
 
 #include "cerberus_anymal_control_base/CerberusAnymalControlBaseRos.hpp"
 
 namespace cerberus_anymal_control_ros {
 
 template<typename ConcreteQuadrupedController>
-CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle,const int numberOfJoints) :
+CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle,const unsigned int numberOfJoints) :
     Controller(numberOfJoints),
-    RosInterface(nodeHandle)
+    RosInterface(nodeHandle),
+    numberOfJoints_(numberOfJoints)
 {
   desJointPositionMsg_.angles.resize(numberOfJoints);
 };
@@ -28,22 +34,9 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::advanceRos() {
   if (Controller::initializedGraph_) {
     // Write the control commands
     boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-    // LF (HAA, HFE, KFE)
-    desJointPositionMsg_.angles[0] = Controller::desJointPositions_(0);
-    desJointPositionMsg_.angles[1] = Controller::desJointPositions_(1);
-    desJointPositionMsg_.angles[2] = Controller::desJointPositions_(2);
-    // RF (HAA, HFE, KFE)
-    desJointPositionMsg_.angles[3] = Controller::desJointPositions_(3);
-    desJointPositionMsg_.angles[4] = Controller::desJointPositions_(4);
-    desJointPositionMsg_.angles[5] = Controller::desJointPositions_(5);
-    // LH (HAA, HFE, KFE)
-    desJointPositionMsg_.angles[6] = Controller::desJointPositions_(6);
-    desJointPositionMsg_.angles[7] = Controller::desJointPositions_(7);
-    desJointPositionMsg_.angles[8] = Controller::desJointPositions_(8);
-    // RH (HAA, HFE, KFE)
-    desJointPositionMsg_.angles[9] = Controller::desJointPositions_(9);
-    desJointPositionMsg_.angles[10] = Controller::desJointPositions_(10);
-    desJointPositionMsg_.angles[11] = Controller::desJointPositions_(11);
+    for (int jointIterator = 0; jointIterator < numberOfJoints_; jointIterator++) {
+      desJointPositionMsg_.angles[jointIterator] = Controller::desJointPositions_(jointIterator);
+    }
     // Publish the control commands
     RosInterface::advanceRos();
   }
@@ -52,67 +45,69 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::advanceRos() {
 template<typename ConcreteQuadrupedController>
 void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::commandVelCallback(const geometry_msgs::Twist &twistMsg) {
   boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-  // Linear Velocity
-  Controller::desLinearVelocity_[0] = twistMsg.linear.x;
-  Controller::desLinearVelocity_[1] = twistMsg.linear.y;
-  Controller::desLinearVelocity_[2] = twistMsg.linear.z;
-  // Angualr Velocity
-  Controller::desAngularVelocity_[0] = twistMsg.angular.x;
-  Controller::desAngularVelocity_[1] = twistMsg.angular.y;
-  Controller::desAngularVelocity_[2] = twistMsg.angular.z;
+  // Twist
+  tf::twistMsgToEigen(twistMsg,Controller::desTwist_);
 }
 
 template<typename ConcreteQuadrupedController>
 void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::jointStateCallback(const sensor_msgs::JointState &jointStateMsg) {
   boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-  // LF
-  Controller::genCoordinates_(7) = jointStateMsg.position[0];
-  Controller::genVelocities_(6) = jointStateMsg.velocity[0];
-  Controller::genCoordinates_(8) = jointStateMsg.position[1];
-  Controller::genVelocities_(7) = jointStateMsg.velocity[1];
-  Controller::genCoordinates_(9) = jointStateMsg.position[2];
-  Controller::genVelocities_(8) = jointStateMsg.velocity[2];
-  // LH
-  Controller::genCoordinates_(13) = jointStateMsg.position[3];
-  Controller::genVelocities_(12) = jointStateMsg.velocity[3];
-  Controller::genCoordinates_(14) = jointStateMsg.position[4];
-  Controller::genVelocities_(13) = jointStateMsg.velocity[4];
-  Controller::genCoordinates_(15) = jointStateMsg.position[5];
-  Controller::genVelocities_(14) = jointStateMsg.velocity[5];
-  // RF
-  Controller::genCoordinates_(10) = jointStateMsg.position[6];
-  Controller::genVelocities_(9) = jointStateMsg.velocity[6];
-  Controller::genCoordinates_(11) = jointStateMsg.position[7];
-  Controller::genVelocities_(10) = jointStateMsg.velocity[7];
-  Controller::genCoordinates_(12) = jointStateMsg.position[8];
-  Controller::genVelocities_(11) = jointStateMsg.velocity[8];
-  // RH
-  Controller::genCoordinates_(16) = jointStateMsg.position[9];
-  Controller::genVelocities_(15) = jointStateMsg.velocity[9];
-  Controller::genCoordinates_(17) = jointStateMsg.position[10];
-  Controller::genVelocities_(16) = jointStateMsg.velocity[10];
-  Controller::genCoordinates_(18) = jointStateMsg.position[11];
-  Controller::genVelocities_(17) = jointStateMsg.velocity[11];
+  mapJointState(jointStateMsg,Controller::genCoordinates_,Controller::genVelocities_);
   // Set the flag
-  if(!Controller::hasJointPositionData_) {
-    Controller::hasJointPositionData_ = true;
-  }
+  Controller::hasJointPositionData_ = true;
 }
 
 template<typename ConcreteQuadrupedController>
 void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::bodyTwistCallback(const geometry_msgs::Twist &bodyTwistMsg) {
   boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
   // Set the body twist
-  Controller::genVelocities_(0) = bodyTwistMsg.linear.x;
-  Controller::genVelocities_(1) = bodyTwistMsg.linear.y;
-  Controller::genVelocities_(2) = bodyTwistMsg.linear.z;
-  Controller::genVelocities_(3) = bodyTwistMsg.angular.x;
-  Controller::genVelocities_(4) = bodyTwistMsg.angular.y;
-  Controller::genVelocities_(5) = bodyTwistMsg.angular.z;
+  mapBodyTwist(bodyTwistMsg,Controller::genVelocities_);
   // Set the flag
-  if(!Controller::hasBodyVelocityData_) {
-    Controller::hasBodyVelocityData_ = true;
-  }
+  Controller::hasBodyVelocityData_ = true;
+}
+
+// Helper Functions
+
+template<typename ConcreteQuadrupedController>
+inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapJointState(const sensor_msgs::JointState &jointStateMsg, Eigen::Matrix<double, 19, 1> &genCoordinates, Eigen::Matrix<double, 18, 1> &genVelocities) {
+  // LF
+  genCoordinates(7) = jointStateMsg.position[0];
+  genVelocities(6) = jointStateMsg.velocity[0];
+  genCoordinates(8) = jointStateMsg.position[1];
+  genVelocities(7) = jointStateMsg.velocity[1];
+  genCoordinates(9) = jointStateMsg.position[2];
+  genVelocities(8) = jointStateMsg.velocity[2];
+  // LH
+  genCoordinates(13) = jointStateMsg.position[3];
+  genVelocities(12) = jointStateMsg.velocity[3];
+  genCoordinates(14) = jointStateMsg.position[4];
+  genVelocities(13) = jointStateMsg.velocity[4];
+  genCoordinates(15) = jointStateMsg.position[5];
+  genVelocities(14) = jointStateMsg.velocity[5];
+  // RF
+  genCoordinates(10) = jointStateMsg.position[6];
+  genVelocities(9) = jointStateMsg.velocity[6];
+  genCoordinates(11) = jointStateMsg.position[7];
+  genVelocities(10) = jointStateMsg.velocity[7];
+  genCoordinates(12) = jointStateMsg.position[8];
+  genVelocities(11) = jointStateMsg.velocity[8];
+  // RH
+  genCoordinates(16) = jointStateMsg.position[9];
+  genVelocities(15) = jointStateMsg.velocity[9];
+  genCoordinates(17) = jointStateMsg.position[10];
+  genVelocities(16) = jointStateMsg.velocity[10];
+  genCoordinates(18) = jointStateMsg.position[11];
+  genVelocities(17) = jointStateMsg.velocity[11];
+}
+
+template<typename ConcreteQuadrupedController>
+inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapBodyTwist(const geometry_msgs::Twist &bodyTwistMsg, Eigen::Matrix<double, 18, 1> &genVelocities) {
+  genVelocities(0) = bodyTwistMsg.linear.x;
+  genVelocities(1) = bodyTwistMsg.linear.y;
+  genVelocities(2) = bodyTwistMsg.linear.z;
+  genVelocities(3) = bodyTwistMsg.angular.x;
+  genVelocities(4) = bodyTwistMsg.angular.y;
+  genVelocities(5) = bodyTwistMsg.angular.z;
 }
 
 } // namespace cerberus_anymal_control_ros

@@ -9,19 +9,21 @@
  * http://www.rsl.ethz.ch/
  */
 
+// ROS for printing
+#include <ros/console.h>
+
 #include "CerberusAnymalControlBase.hpp"
 
 namespace cerberus_anymal_control {
 
 template <typename ConcreteQuadrupedController>
-CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBase(int numberOfJoints) :
+CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBase(const unsigned int numberOfJoints) :
     quadrupedController_(),
     graph_(),
     numberOfJoints_(numberOfJoints),
     genCoordinates_(),
     genVelocities_(),
-    desLinearVelocity_(Eigen::Vector3d::Zero()),
-    desAngularVelocity_(Eigen::Vector3d::Zero()),
+    desTwist_(Eigen::VectorXd::Zero(6)),
     desJointPositions_(Eigen::VectorXd::Zero(numberOfJoints)),
     hasBodyVelocityData_(false),
     hasJointPositionData_(false),
@@ -29,21 +31,15 @@ CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBas
 {
   quadrupedController_ = std::make_unique<ConcreteQuadrupedController>();
   if (numberOfJoints_ != 12) {
-    std::cout << "[CerberusAnymalControlBase::CerberusAnymalControlBase] Joint Number is not equal to 12! Controller might not be working properly." << std::endl;
+    ROS_INFO("[CerberusAnymalControlBase::CerberusAnymalControlBase] Joint Number is not equal to 12! Controller might not be working properly.");
   }
   // Fix the pose since we already subscribe in base frame
-  genCoordinates_(0) = 0.0;
-  genCoordinates_(1) = 0.0;
-  genCoordinates_(2) = 0.0;
-  genCoordinates_(3) = 1.0;
-  genCoordinates_(4) = 0.0;
-  genCoordinates_(5) = 0.0;
-  genCoordinates_(6) = 0.0;
+  genCoordinates_ << 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
 }
 
 template <typename ConcreteQuadrupedController>
 void CerberusAnymalControlBase<ConcreteQuadrupedController>::loadParameters(const std::string& path) {
-  std::cout << "[CerberusAnymalControlBase::loadParameters] Loading controller parameters" << std::endl;
+  ROS_INFO("[CerberusAnymalControlBase::loadParameters] Loading controller parameters");
   graph_.initialize(path + "/graph.pb");
   graph_.loadLP(path + "/params.txt");
 }
@@ -58,7 +54,7 @@ void CerberusAnymalControlBase<ConcreteQuadrupedController>::advance() {
     Eigen::Matrix<double, 12, 1> jointPositions;
     {
       boost::unique_lock<boost::shared_mutex>lock(data_mutex_);
-      quadrupedController_->getDesJointPos(jointPositions, genCoordinates_, genVelocities_, desLinearVelocity_[0], desLinearVelocity_[1], desAngularVelocity_[2]);
+      quadrupedController_->getDesJointPos(jointPositions, genCoordinates_, genVelocities_, desTwist_(0), desTwist_(1), desTwist_(5));
     }
     // Iterate through all joints
     for (unsigned int jointIterator = 0; jointIterator < numberOfJoints_; jointIterator++) {

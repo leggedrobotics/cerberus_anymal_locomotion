@@ -18,7 +18,7 @@
 namespace cerberus_anymal_b_control_1 {
 
 CerberusAnymalBControl1::CerberusAnymalBControl1(ros::NodeHandle &nodeHandle) :
-  RosController(nodeHandle,12)
+  RosController(nodeHandle,numberOfJoints_)
 {
   loadParameters();
 };

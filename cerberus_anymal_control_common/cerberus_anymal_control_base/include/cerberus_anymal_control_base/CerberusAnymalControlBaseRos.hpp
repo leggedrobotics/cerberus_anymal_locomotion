@@ -27,7 +27,7 @@ class CerberusAnymalControlBaseRos : public cerberus_anymal_control::CerberusAny
   using Controller = cerberus_anymal_control::CerberusAnymalControlBase<ConcreteQuadrupedController>;
   using RosInterface = cerberus_anymal_control_ros::CerberusAnymalControlRos;
 
-  CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle,const int numberOfJoints);
+  CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle,const unsigned int numberOfJoints);
   ~CerberusAnymalControlBaseRos() = default;
 
   void advanceRos() override;
@@ -36,6 +36,12 @@ class CerberusAnymalControlBaseRos : public cerberus_anymal_control::CerberusAny
   void commandVelCallback(const geometry_msgs::Twist &twistMsg) override;
   void jointStateCallback(const sensor_msgs::JointState &jointStateMsg) override;
   void bodyTwistCallback(const geometry_msgs::Twist &bodyTwistMsg) override;
+  inline void mapJointState(const sensor_msgs::JointState &jointStateMsg,
+                            Eigen::Matrix<double, 19, 1> &genCoordinates,
+                            Eigen::Matrix<double, 18, 1> &genVelocities);
+  inline void mapBodyTwist(const geometry_msgs::Twist &bodyTwistMsg, Eigen::Matrix<double, 18, 1> &genVelocities);
+
+  const unsigned int numberOfJoints_;
 };
 
 } // namespace cerberus_anymal_control_ros

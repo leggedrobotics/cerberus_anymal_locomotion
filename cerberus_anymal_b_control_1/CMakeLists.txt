@@ -7,12 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Package dependencies
 set(PACKAGE_DEPENDENCIES
-  catkin_simple
   cerberus_anymal_control_base
   cerberus_anymal_control_ros
   cerberus_anymal_utils
+  eigen_conversions
   geometry_msgs
-  glog_catkin
   roscpp
   roslib
 )

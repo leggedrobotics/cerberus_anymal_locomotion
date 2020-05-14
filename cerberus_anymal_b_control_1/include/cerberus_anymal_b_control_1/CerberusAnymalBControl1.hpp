@@ -31,6 +31,8 @@ class CerberusAnymalBControl1 : public cerberus_anymal_control_ros::CerberusAnym
  private:
   void loadParameters();
   void initialize() override;
+
+  static constexpr unsigned int numberOfJoints_ = 12;
 };
 
 } // namespace cerberus_anymal_b_control_1
