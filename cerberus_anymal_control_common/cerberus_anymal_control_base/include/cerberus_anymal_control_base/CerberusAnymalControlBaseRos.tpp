@@ -31,8 +31,10 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::advanceRos() {
   if (Controller::initializedGraph_) {
     // Write the control commands
     boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-    for (int jointIterator = 0; jointIterator < cerberus_anymal_control::numberOfJoints; jointIterator++) {
-      desJointPositionMsg_.angles[jointIterator] = Controller::desJointPositions_(jointIterator);
+    int jointIterator = 0;
+    for (auto& angle : desJointPositionMsg_.angles) {
+      angle = Controller::desJointPositions_(jointIterator);
+      jointIterator++;
     }
     // Publish the control commands
     RosInterface::advanceRos();
