@@ -8,8 +8,6 @@
  * All rights reserved.
  * http://www.rsl.ethz.ch/
  */
-// Testing
-#include <chrono>
 
 // Eigen
 #include <eigen_conversions/eigen_msg.h>
