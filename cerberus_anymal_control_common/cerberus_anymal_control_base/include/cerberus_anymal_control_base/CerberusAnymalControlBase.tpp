@@ -30,7 +30,7 @@ CerberusAnymalControlBase<ConcreteQuadrupedController>::CerberusAnymalControlBas
 {
   quadrupedController_ = std::make_unique<ConcreteQuadrupedController>();
   //! Fix the pose since we already subscribe in base frame
-  genCoordinates_ << 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  genCoordinates_.block(0,0,7,1) << 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
 }
 
 template <typename ConcreteQuadrupedController>
