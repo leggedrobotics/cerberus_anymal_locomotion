@@ -19,12 +19,11 @@
 namespace cerberus_anymal_control_ros {
 
 template<typename ConcreteQuadrupedController>
-CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle,const unsigned int numberOfJoints) :
-    Controller(numberOfJoints),
-    RosInterface(nodeHandle),
-    numberOfJoints_(numberOfJoints)
+CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::CerberusAnymalControlBaseRos(ros::NodeHandle &nodeHandle) :
+    Controller(),
+    RosInterface(nodeHandle)
 {
-  desJointPositionMsg_.angles.resize(numberOfJoints);
+  desJointPositionMsg_.angles.resize(cerberus_anymal_control::numberOfJoints);
 };
 
 template<typename ConcreteQuadrupedController>
@@ -34,7 +33,7 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::advanceRos() {
   if (Controller::initializedGraph_) {
     // Write the control commands
     boost::shared_lock<boost::shared_mutex>lock(Controller::data_mutex_);
-    for (int jointIterator = 0; jointIterator < numberOfJoints_; jointIterator++) {
+    for (int jointIterator = 0; jointIterator < cerberus_anymal_control::numberOfJoints; jointIterator++) {
       desJointPositionMsg_.angles[jointIterator] = Controller::desJointPositions_(jointIterator);
     }
     // Publish the control commands
@@ -67,9 +66,11 @@ void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::bodyTwistCallbac
 }
 
 // Helper Functions
-
 template<typename ConcreteQuadrupedController>
-inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapJointState(const sensor_msgs::JointState &jointStateMsg, Eigen::Matrix<double, 19, 1> &genCoordinates, Eigen::Matrix<double, 18, 1> &genVelocities) {
+inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapJointState(
+    const sensor_msgs::JointState &jointStateMsg,
+    cerberus_anymal_control::GenCoordinates &genCoordinates,
+    cerberus_anymal_control::GenVelocities &genVelocities) {
   // LF
   genCoordinates(7) = jointStateMsg.position[0];
   genVelocities(6) = jointStateMsg.velocity[0];
@@ -101,7 +102,9 @@ inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapJointS
 }
 
 template<typename ConcreteQuadrupedController>
-inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapBodyTwist(const geometry_msgs::Twist &bodyTwistMsg, Eigen::Matrix<double, 18, 1> &genVelocities) {
+inline void CerberusAnymalControlBaseRos<ConcreteQuadrupedController>::mapBodyTwist(
+    const geometry_msgs::Twist &bodyTwistMsg,
+    cerberus_anymal_control::GenVelocities &genVelocities) {
   genVelocities(0) = bodyTwistMsg.linear.x;
   genVelocities(1) = bodyTwistMsg.linear.y;
   genVelocities(2) = bodyTwistMsg.linear.z;

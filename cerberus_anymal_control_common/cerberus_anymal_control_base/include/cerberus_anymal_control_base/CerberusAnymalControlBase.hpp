@@ -25,11 +25,17 @@
 
 namespace cerberus_anymal_control {
 
+//!@brief Fixed variable number of joints since controller only works with 12 joints.
+static constexpr unsigned int numberOfJoints = 12;
+
+using GenCoordinates = Eigen::Matrix<double, 19, 1>;
+using GenVelocities = Eigen::Matrix<double, 18, 1>;
+using Twist = Eigen::Matrix<double, 6, 1>;
+
 template <typename ConcreteQuadrupedController>
 class CerberusAnymalControlBase {
  public:
-  CerberusAnymalControlBase() = default;
-  explicit CerberusAnymalControlBase(const unsigned int numberOfJoints);
+  CerberusAnymalControlBase();
   ~CerberusAnymalControlBase() = default;
 
  protected:
@@ -44,14 +50,13 @@ class CerberusAnymalControlBase {
   GraphLoader<float> graph_;
 
  protected:
-  const unsigned int numberOfJoints_;
   //! @brief Coordinates for the controller
   //! Position(x,y,z),Orientation(w,x,y,z),JointPositions(LF_HAA,LF_HFE,LF_KFE,RF_HAA,RF_HFE,RF_KFE,LH_HAA,LH_HFE,LH_KFE,RH_HAA,RH_HFE,RH_KFE)
-  Eigen::Matrix<double, 19, 1> genCoordinates_;
+  GenCoordinates genCoordinates_;
   //! LinearVelocity(x,y,z),AngularVelocity(x,y,z),JointVelocities(LF_HAA,LF_HFE,LF_KFE,RF_HAA,RF_HFE,RF_KFE,LH_HAA,LH_HFE,LH_KFE,RH_HAA,RH_HFE,RH_KFE)
-  Eigen::Matrix<double, 18, 1> genVelocities_;
+  GenVelocities genVelocities_;
   //! LinearVelocity(x,y,z), AngularVelocity(x,y,z)
-  Eigen::Matrix<double, 6, 1> desTwist_;
+  Twist desTwist_;
   Eigen::VectorXd desJointPositions_;
 
   //! @brief Mutex for the controller data
