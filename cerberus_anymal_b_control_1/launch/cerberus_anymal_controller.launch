@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Args -->
+  <arg name="name"           default="anymal_b"/>
+
+  <!-- Controller node -->
+  <group ns="$(arg name)">
+    <!-- Load parameters -->
+    <rosparam command="load" file="$(find cerberus_anymal_b_control_1)/config/ros.yaml" />
+    <!-- Start node -->
+    <node name="cerberus_anymal_b_controller" pkg="cerberus_anymal_b_control_1" type="cerberus_anymal_b_control_1_node" output="screen"/>
+  </group>
+</launch>

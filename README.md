@@ -1,11 +1,11 @@
 # CERBERUS ANYmal Locomotion
 This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://github.com/osrf/subt/wiki).
 
-**Authors & Maintainers**: 
+**Authors & Maintainers**:
   * Marco Tranzatto
   * Samuel Zimmermann
   * Timon Homberger
-  
+
 **Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
 
 [![CERBERUS ANYmal](doc/cerberus_anymal.gif)](doc/cerberus_anymal.gif)
@@ -35,22 +35,23 @@ cd cerberus_anymal_locomotion/
 git submodule update --init --recursive
 ```
 
-Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependency (tensorflow-cpp) and the version used by Ignition Gazebo.
+Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependency (tensorflow-cpp) and the version used by Ignition Gazebo. Furthermore we build in `Release` mode.
 ```
 source /opt/ros/melodic/setup.bash
 
 cd ~/anymal_locomotion_ws/
 
 catkin config --extend ~/subt_ws/install/
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 
-catkin build cerberus_anymal_control
+catkin build cerberus_anymal_b_control_1
 ```
 
 Launch the ANYmal locomotion controller:
 ```
 source ~/anymal_locomotion_ws/devel/setup.bash
 
-roslaunch cerberus_anymal_control cerberus_anymal_controller.launch
+roslaunch cerberus_anymal_b_control_1 cerberus_anymal_controller.launch
 ```
 
 ## Bugs & Issues

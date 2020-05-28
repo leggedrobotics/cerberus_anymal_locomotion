@@ -1,0 +1,11 @@
+subscriber:
+  command_velocity:
+    topic: "cmd_vel"
+  joint_state:
+    topic: "joint_state"
+  body_twist:
+    topic: "robot_base_twist"
+
+publisher:
+  des_joint_position:
+    topic: "desired_joint_positions"

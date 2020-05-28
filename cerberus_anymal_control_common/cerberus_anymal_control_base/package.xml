@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>cerberus_anymal_control_base</name>
+  <version>1.0.0</version>
+  <description>Controller template for DARPA SubT virtual challenge</description>
+  <maintainer email="zsamuel@ethz.ch">Samuel Zimmermann</maintainer>
+  <license>Proprietary</license>
+  <author email="zsamuel@ethz.ch">Samuel Zimmermann</author>
+
+  <!-- buildtool_depend: dependencies of the build process -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <!-- build_depend: dependencies only used in source files -->
+  <build_depend>boost</build_depend>
+  <build_depend>cerberus_anymal_utils</build_depend>
+  <!-- depend: build, export, and execution dependency -->
+  <depend>cerberus_anymal_control_ros</depend>
+</package>
