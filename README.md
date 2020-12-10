@@ -7,8 +7,10 @@ This repository contains the software that can be used to control the ANYmal mod
   * Timon Homberger
 
 **Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
+
 ### ANYmal B
 [![CERBERUS ANYmal B](doc/cerberus_anymal_b.gif)](doc/cerberus_anymal_b.gif)
+
 ### ANYmal C
 [![CERBERUS ANYmal C](doc/cerberus_anymal_c.gif)](doc/cerberus_anymal_c.gif)
 
