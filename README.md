@@ -8,7 +8,8 @@ This repository contains the software that can be used to control the ANYmal mod
 
 **Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
 
-[![CERBERUS ANYmal](doc/cerberus_anymal.gif)](doc/cerberus_anymal.gif)
+[![CERBERUS ANYmal B](doc/cerberus_anymal_b.gif)](doc/cerberus_anymal_b.gif)
+[![CERBERUS ANYmal C](doc/cerberus_anymal_c.gif)](doc/cerberus_anymal_c.gif)
 
 ## License
 This software is released under a [BSD 3-Clause license](LICENSE).
@@ -16,7 +17,23 @@ This software is released under a [BSD 3-Clause license](LICENSE).
 ## Publications
 If you use this work in an academic context, please cite the following publications:
 
-`Coming soon ...`
+> Joonho Lee,  Jemin Hwangbo,  Lorenz Wellhausen,  Vladlen Koltun and Marco Hutter
+> **"Learning quadrupedal locomotion over challenging terrain"**,
+> in Science Robotics, 21.10, 2020 ([DOI](https://robotics.sciencemag.org/content/5/47/eabc5986))
+
+    @article{Leeeabc5986,
+  	    author = {Lee, Joonho and Hwangbo, Jemin and Wellhausen, Lorenz and Koltun, Vladlen and Hutter, Marco},
+      	title = {Learning quadrupedal locomotion over challenging terrain},
+      	volume = {5},
+      	number = {47},
+      	elocation-id = {eabc5986},
+      	year = {2020},
+      	doi = {10.1126/scirobotics.abc5986},
+      	publisher = {Science Robotics},
+      	URL = {https://robotics.sciencemag.org/content/5/47/eabc5986},
+      	eprint = {https://robotics.sciencemag.org/content/5/47/eabc5986.full.pdf},
+      	journal = {Science Robotics}
+    }
 
 ## Dependencies
 The following dependencies are needed to run the ANYmal locomotion controller.
