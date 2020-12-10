@@ -7,8 +7,9 @@ This repository contains the software that can be used to control the ANYmal mod
   * Timon Homberger
 
 **Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
-
+### ANYmal B
 [![CERBERUS ANYmal B](doc/cerberus_anymal_b.gif)](doc/cerberus_anymal_b.gif)
+### ANYmal C
 [![CERBERUS ANYmal C](doc/cerberus_anymal_c.gif)](doc/cerberus_anymal_c.gif)
 
 ## License
@@ -60,15 +61,21 @@ cd ~/anymal_locomotion_ws/
 
 catkin config --extend ~/subt_ws/install/
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
+```
 
+Build and launch the locomotion controller for ANYmal B:
+```
 catkin build cerberus_anymal_b_control_1
-```
-
-Launch the ANYmal locomotion controller:
-```
 source ~/anymal_locomotion_ws/devel/setup.bash
 
 roslaunch cerberus_anymal_b_control_1 cerberus_anymal_controller.launch
+```
+Build and launch the locomotion controller for ANYmal C:
+```
+catkin build cerberus_anymal_c_control_1
+source ~/anymal_locomotion_ws/devel/setup.bash
+
+roslaunch cerberus_anymal_c_control_1 cerberus_anymal_controller.launch
 ```
 
 ## Bugs & Issues
