@@ -2,8 +2,8 @@
 This repository contains the software that can be used to control the ANYmal model in the  [DARPA Subterranean Challenge Virtual Competition Simulator](https://github.com/osrf/subt/wiki).
 
 **Authors & Maintainers**:
-  * Marco Tranzatto
   * Samuel Zimmermann
+  * Marco Tranzatto
   * Timon Homberger
 
 **Affiliation:** [Robotic Systems Lab - ETH Zurich](https://rsl.ethz.ch/the-lab.html)
@@ -55,7 +55,7 @@ cd cerberus_anymal_locomotion/
 git submodule update --init --recursive
 ```
 
-Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependency (tensorflow-cpp) and the version used by Ignition Gazebo. Furthermore we build in `Release` mode.
+Configure and build the workspace. We need to overlay the `subt_ws` workspace because of protobuf version mismatch between one of our dependencies (tensorflow-cpp) and the version used by Ignition Gazebo. Furthermore we build in `Release` mode.
 ```
 source /opt/ros/melodic/setup.bash
 
